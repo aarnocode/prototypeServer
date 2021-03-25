@@ -57,7 +57,7 @@ self.addEventListener("install", function (event) {
 // Here we intercept request and serve up the matching files
 self.addEventListener("fetch", function (event) {
   if (!navigator.onLine) {
-    if (event.request.url === "https://prototype-app-2ce47.web.app/") {
+    if (event.request.url === "https://prototypepushserver.herokuapp.com/") {
       event.waitUntil(
         this.registration.showNotification("Offline Mode", {
           body: "Hello, you are currently on offline mode",
