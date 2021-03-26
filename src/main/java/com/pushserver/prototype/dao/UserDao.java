@@ -25,13 +25,13 @@ public class UserDao implements UserRepository{
                 Firestore dbFirestore = FirestoreClient.getFirestore();
                 ApiFuture<WriteResult> collectionsApiFuture = dbFirestore.collection("api/v1/users")
                         .document(user.getUser_id().toString()).set(user);
-                return new ResponseMessage("Successfully Registered!");
+                return new ResponseMessage(200,"Successfully Registered!");
             }catch(Exception e){
                 System.out.println(e.getMessage());
-                return new ResponseMessage("Failed to register");
+                return new ResponseMessage(400,"Failed to register");
             }
         }else{
-            return new ResponseMessage("Email already exists");
+            return new ResponseMessage(400,"Email already exists");
         }
 
     }
