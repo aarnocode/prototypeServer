@@ -50,12 +50,13 @@ public class UserDao implements UserRepository{
     }
 
     public boolean validateEmail(String email) throws ExecutionException, InterruptedException {
+        System.out.println("enetered validate");
         Firestore dbFirestore = FirestoreClient.getFirestore();
         CollectionReference users = dbFirestore.collection("api/v1/users");
         Query query = users.whereEqualTo("email",email);
         ApiFuture<QuerySnapshot> querySnapshot = query.get();
         for(DocumentSnapshot document : querySnapshot.get().getDocuments()){
-            if(document.get("email")==email){
+            if(document.get("email").equals(email)){
                 return false;
             }
         }
