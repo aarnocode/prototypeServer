@@ -1,8 +1,10 @@
 package com.pushserver.prototype.controller;
 
+import com.pushserver.prototype.model.ResponseMessage;
 import com.pushserver.prototype.model.User;
 import com.pushserver.prototype.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -22,7 +24,7 @@ public class UserController {
     }
 
     @PostMapping("api/register")
-    public String registerUser(@RequestBody User user) throws ExecutionException, InterruptedException {
+    public ResponseMessage registerUser(@RequestBody User user) throws ExecutionException, InterruptedException {
         return userService.registerUser(user);
     }
 }

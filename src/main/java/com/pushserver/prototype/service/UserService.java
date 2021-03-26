@@ -1,8 +1,10 @@
 package com.pushserver.prototype.service;
 
 import com.pushserver.prototype.dao.UserDao;
+import com.pushserver.prototype.model.ResponseMessage;
 import com.pushserver.prototype.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -17,7 +19,7 @@ public class UserService {
         this.userDao = userDao;
     }
 
-    public String registerUser(User user) throws ExecutionException, InterruptedException {
+    public ResponseMessage registerUser(User user) throws ExecutionException, InterruptedException {
         return userDao.registerUser(user);
     }
 
