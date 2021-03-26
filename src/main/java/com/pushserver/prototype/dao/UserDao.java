@@ -50,7 +50,6 @@ public class UserDao implements UserRepository{
     }
 
     public boolean validateEmail(String email) throws ExecutionException, InterruptedException {
-        System.out.println("enetered validate");
         Firestore dbFirestore = FirestoreClient.getFirestore();
         CollectionReference users = dbFirestore.collection("api/v1/users");
         Query query = users.whereEqualTo("email",email);
