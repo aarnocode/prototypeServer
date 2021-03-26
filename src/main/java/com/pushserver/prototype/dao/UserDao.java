@@ -20,15 +20,20 @@ public class UserDao implements UserRepository{
     @Override
     public ResponseMessage registerUser(User user) throws ExecutionException, InterruptedException {
         user.setUser_id(getAllUser().size()+1);
-        try{
-            Firestore dbFirestore = FirestoreClient.getFirestore();
-            ApiFuture<WriteResult> collectionsApiFuture = dbFirestore.collection("api/v1/users")
-                    .document(user.getUser_id().toString()).set(user);
-            return new ResponseMessage("Successfully Registered!");
-        }catch(Exception e){
-            System.out.println(e.getMessage());
-            return new ResponseMessage("Failed to register");
+        if(validateEmail(user.getEmail())){
+            try{
+                Firestore dbFirestore = FirestoreClient.getFirestore();
+                ApiFuture<WriteResult> collectionsApiFuture = dbFirestore.collection("api/v1/users")
+                        .document(user.getUser_id().toString()).set(user);
+                return new ResponseMessage("Successfully Registered!");
+            }catch(Exception e){
+                System.out.println(e.getMessage());
+                return new ResponseMessage("Failed to register");
+            }
+        }else{
+            return new ResponseMessage("Email already exists");
         }
+
     }
 
     @Override
@@ -42,5 +47,18 @@ public class UserDao implements UserRepository{
             userList.add(document.toObject(User.class));
         }
         return userList;
+    }
+
+    public boolean validateEmail(String email) throws ExecutionException, InterruptedException {
+        Firestore dbFirestore = FirestoreClient.getFirestore();
+        CollectionReference users = dbFirestore.collection("api/v1/users");
+        Query query = users.whereEqualTo("email",email);
+        ApiFuture<QuerySnapshot> querySnapshot = query.get();
+        for(DocumentSnapshot document : querySnapshot.get().getDocuments()){
+            if(document.get("email")==email){
+                return false;
+            }
+        }
+        return true;
     }
 }
