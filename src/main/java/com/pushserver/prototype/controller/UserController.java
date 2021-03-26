@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.concurrent.ExecutionException;
 
 @RestController
-@CrossOrigin("*")
 public class UserController {
 
     private final UserService userService;
