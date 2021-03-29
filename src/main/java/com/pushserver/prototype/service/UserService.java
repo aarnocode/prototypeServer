@@ -23,6 +23,10 @@ public class UserService {
         return userDao.registerUser(user);
     }
 
+    public User userLogin(User user){
+        return userDao.userLogin(user);
+    }
+
     public List<User> getAllUser() throws ExecutionException, InterruptedException {
         return userDao.getAllUser();
     }

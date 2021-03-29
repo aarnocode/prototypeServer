@@ -36,6 +36,30 @@ public class UserDao implements UserRepository{
 
     }
 
+    public User userLogin(User user){
+        try{
+            Firestore dbFirestore = FirestoreClient.getFirestore();
+            CollectionReference users = dbFirestore.collection("api/v1/users");
+            Query email = users.whereEqualTo("email",user.getEmail());
+            ApiFuture<QuerySnapshot> querySnapshot = email.get();
+            for(DocumentSnapshot document : querySnapshot.get().getDocuments()){
+                if(document.get("email").equals(user.getEmail())){
+                    if(document.get("password").equals(user.getPassword())){
+                        return new User(document.get("first_name").toString(),
+                                        document.get("last_name").toString(),
+                                        document.get("email").toString());
+                    }else{
+                        return new User();
+                    }
+                }
+            }
+            return new User();
+        }catch (Exception e){
+            System.out.println(e.getMessage());
+            return new User();
+        }
+    }
+
     @Override
     public List<User> getAllUser() throws ExecutionException, InterruptedException {
         Firestore dbFirestore = FirestoreClient.getFirestore();

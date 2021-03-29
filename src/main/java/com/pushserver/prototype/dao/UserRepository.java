@@ -9,6 +9,6 @@ import java.util.concurrent.ExecutionException;
 
 public interface UserRepository {
     ResponseMessage registerUser(User user) throws ExecutionException, InterruptedException;
-
+    User userLogin(User user);
     List<User> getAllUser() throws ExecutionException, InterruptedException;
 }
