@@ -23,12 +23,12 @@ public class NoteController {
         this.noteService = noteService;
     }
 
-    @PostMapping("api/v1/getNotes")
+    @PostMapping("api/getNotes")
     public List<Note> getUserNotes(@RequestBody User user){
         return noteService.getUserNotes(user);
     }
 
-    @PostMapping("api/v1/addNote")
+    @PostMapping("api/addNote")
     public ResponseMessage addUserNote(@RequestBody Note note) throws ExecutionException, InterruptedException {
         return noteService.addUserNote(note);
     }
