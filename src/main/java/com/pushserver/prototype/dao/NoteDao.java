@@ -18,7 +18,9 @@ public class NoteDao implements NoteRepository{
 
     @Override
     public ResponseMessage addUserNote(Note note) throws ExecutionException, InterruptedException {
-        note.setId(getAllNotes().size()+1);
+        List<Note> all = getAllNotes();
+        int id = all.get(all.size()-1).getId()+1;
+        note.setId(id);
 
         try{
             Firestore dbFirestore = FirestoreClient.getFirestore();

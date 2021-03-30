@@ -35,6 +35,6 @@ public class NoteController {
 
     @PostMapping("api/removeNote")
     public ResponseMessage removeNote(@RequestBody Note note){
-        return noteService.removeNote(note); 
+        return noteService.removeNote(note);
     }
 }
