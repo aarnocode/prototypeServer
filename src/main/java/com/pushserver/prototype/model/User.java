@@ -16,11 +16,13 @@ public class User {
         this.password = password;
     }
 
-    public User(String first_name, String last_name, String email) {
+    public User(Integer user_id, String first_name, String last_name, String email) {
+        this.user_id = user_id;
         this.first_name = first_name;
         this.last_name = last_name;
         this.email = email;
     }
+
 
     public User() {
     }

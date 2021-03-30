@@ -45,7 +45,8 @@ public class UserDao implements UserRepository{
             for(DocumentSnapshot document : querySnapshot.get().getDocuments()){
                 if(document.get("email").equals(user.getEmail())){
                     if(document.get("password").equals(user.getPassword())){
-                        return new User(document.get("first_name").toString(),
+                        return new User(Integer.valueOf(document.get("user_id").toString()),
+                                        document.get("first_name").toString(),
                                         document.get("last_name").toString(),
                                         document.get("email").toString());
                     }else{
