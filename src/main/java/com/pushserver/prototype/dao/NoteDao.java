@@ -3,6 +3,7 @@ package com.pushserver.prototype.dao;
 import com.google.api.core.ApiFuture;
 import com.google.cloud.firestore.*;
 import com.google.firebase.cloud.FirestoreClient;
+import com.google.firestore.v1.Write;
 import com.pushserver.prototype.model.Note;
 import com.pushserver.prototype.model.ResponseMessage;
 import com.pushserver.prototype.model.User;
@@ -48,6 +49,19 @@ public class NoteDao implements NoteRepository{
         }catch (Exception e){
             System.out.println(e.getMessage());
             return noteList;
+        }
+    }
+
+    @Override
+    public ResponseMessage removeNote(Note note) {
+        try{
+            Firestore dbFirestore = FirestoreClient.getFirestore();
+            ApiFuture<WriteResult> writeResult = dbFirestore.collection("api/v1/notes")
+                    .document(note.getId().toString()).delete();
+            return new ResponseMessage(200, "Note successfully removed");
+        }catch (Exception e){
+            System.out.println(e.getMessage());
+            return new ResponseMessage(400,"Failed to remove note");
         }
     }
 

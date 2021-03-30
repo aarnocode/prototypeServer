@@ -32,4 +32,9 @@ public class NoteController {
     public ResponseMessage addUserNote(@RequestBody Note note) throws ExecutionException, InterruptedException {
         return noteService.addUserNote(note);
     }
+
+    @PostMapping("api/removeNote")
+    public ResponseMessage removeNote(@RequestBody Note note){
+        return noteService.removeNote(note); 
+    }
 }

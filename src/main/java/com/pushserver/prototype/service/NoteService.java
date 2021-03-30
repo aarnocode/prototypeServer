@@ -26,4 +26,8 @@ public class NoteService {
     public List<Note> getUserNotes(User user){
         return noteRepository.getUserNotes(user);
     }
+
+    public ResponseMessage removeNote(Note note){
+        return noteRepository.removeNote(note);
+    }
 }

@@ -11,4 +11,5 @@ public interface NoteRepository {
     ResponseMessage addUserNote(Note note) throws ExecutionException, InterruptedException;
     List<Note> getUserNotes(User user);
     List<Note> getAllNotes() throws ExecutionException, InterruptedException;
+    ResponseMessage removeNote(Note note);
 }
